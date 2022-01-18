@@ -1,7 +1,7 @@
 //#region steps
 /**
  * 1.Adjust the body of Writer to write to a single file. Read below
- * 2.Empty `users-carmel` bucket.
+ * 2.Empty `users-bucket-carmel` bucket.
  * 3.Create a test configuration. Read below.
  * 4.Test the adjusted lambda function.
  */
@@ -16,7 +16,7 @@ const s3 = new AWS.S3();
 exports.handler = (event, context) => {
   const { users } = event;
 
-  const bucket = "users-carmel";
+  const bucket = "users-bucket-carmel";
   const eventId = context.awsRequestId;
 
   const params = {
