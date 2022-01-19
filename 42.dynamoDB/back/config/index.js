@@ -12,4 +12,18 @@ const dict = require("../db/dictionary.json");
 const dynamodb = new AWS.DynamoDB();
 const client = new AWS.DynamoDB.DocumentClient();
 
-module.exports = { port, dict, TableName, dynamodb, client };
+const wordFormatter = (wordObj) => {
+  const format = { definitions: [] };
+  format.wordId = wordObj.wordId.S;
+  format.word = wordObj.word.S;
+  format.pos = wordObj.pos.S;
+  for (const def of wordObj.definitions.L) {
+    format.definitions.push(def.S);
+  }
+  if ("synonyms" in wordObj) {
+    format.synonyms = wordObj.synonyms.S;
+  }
+  return format;
+};
+
+module.exports = { port, dict, TableName, dynamodb, client, wordFormatter };
