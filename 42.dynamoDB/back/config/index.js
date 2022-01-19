@@ -1,14 +1,11 @@
 const AWS = require("aws-sdk");
 require("dotenv").config();
+const dict = require("../db/dictionary.json");
 
 AWS.config.update({
   region: "eu-west-2",
 });
-const port = process.env.PORT || 8080;
 
-const TableName = "dictionary";
-
-const dict = require("../db/dictionary.json");
 const dynamodb = new AWS.DynamoDB();
 const client = new AWS.DynamoDB.DocumentClient();
 
@@ -26,4 +23,28 @@ const wordFormatter = (wordObj) => {
   return format;
 };
 
-module.exports = { port, dict, TableName, dynamodb, client, wordFormatter };
+const posEnum = {
+  n: "n.",
+  prep: "prep.",
+  a: "a.",
+  v: "v.",
+  adv: "adv.",
+  p: "p.",
+  interj: "interj.",
+  conj: "conj.",
+  pron: "pron.",
+};
+
+const port = process.env.PORT || 8080;
+
+const TableName = "dictionary";
+
+module.exports = {
+  port,
+  dict,
+  TableName,
+  dynamodb,
+  client,
+  wordFormatter,
+  posEnum,
+};
