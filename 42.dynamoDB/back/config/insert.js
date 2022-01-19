@@ -1,12 +1,6 @@
-const AWS = require("aws-sdk");
 const { nanoid } = require("nanoid");
-const dict = require("./db/dictionary.json");
 
-AWS.config.update({
-  region: "eu-west-2",
-});
-
-const TableName = "dictionary";
+const { dynamodb, client, dict, TableName } = require("./index");
 
 const params = {
   AttributeDefinitions: [
@@ -25,7 +19,6 @@ const params = {
   },
 };
 
-const dynamodb = new AWS.DynamoDB();
 const create = async () => {
   try {
     console.group(`INSERTING TABLE '${TableName}'`);
@@ -40,25 +33,18 @@ const create = async () => {
   }
 };
 
-const client = new AWS.DynamoDB.DocumentClient();
 const insert = async () => {
   try {
-    dict.forEach(async (Item, i) => {
-      if (i >= 60000) {
-        Item.wordId = nanoid(40);
-        const putElementParams = {
-          TableName,
-          Item,
-        };
-        await client.put(putElementParams).promise();
-      }
+    dict.forEach(async (Item) => {
+      Item.wordId = nanoid(40);
+      const putElementParams = {
+        TableName,
+        Item,
+      };
+      await client.put(putElementParams).promise();
     });
     console.log("all items inserted!");
   } catch (error) {
     console.log(error);
   }
 };
-
-insert();
-
-// module.exports = client;
