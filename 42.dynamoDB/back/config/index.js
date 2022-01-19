@@ -23,6 +23,8 @@ const wordFormatter = (wordObj) => {
   return format;
 };
 
+const randomItem = (arr = []) => arr[(Math.random() * arr.length) | 0];
+
 const posEnum = {
   n: "n.",
   prep: "prep.",
@@ -34,6 +36,34 @@ const posEnum = {
   conj: "conj.",
   pron: "pron.",
 };
+const letters = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z",
+];
 
 const port = process.env.PORT || 8080;
 
@@ -47,4 +77,6 @@ module.exports = {
   client,
   wordFormatter,
   posEnum,
+  letters,
+  randomItem,
 };

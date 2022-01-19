@@ -14,8 +14,8 @@ const params = {
   ],
   TableName, //TABLE_NAME
   ProvisionedThroughput: {
-    ReadCapacityUnits: 10000,
-    WriteCapacityUnits: 10000,
+    ReadCapacityUnits: 1,
+    WriteCapacityUnits: 1,
   },
 };
 

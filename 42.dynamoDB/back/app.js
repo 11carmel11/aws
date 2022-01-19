@@ -6,6 +6,8 @@ const {
   TableName,
   wordFormatter,
   posEnum,
+  letters,
+  randomItem,
 } = require("./config");
 
 const app = express();
@@ -13,6 +15,29 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.get("/pos/:pos", async (req, res) => {
+  const {
+    params: { pos },
+    query: { letter },
+  } = req;
+
+  const randomLetter = letter || randomItem(letters);
+
+  const params = {
+    FilterExpression: "begins_with(word, :letterFormat) AND pos = :posFormat",
+    ExpressionAttributeValues: {
+      ":letterFormat": { S: randomLetter.toUpperCase() },
+      ":posFormat": { S: posEnum[pos] },
+    },
+    TableName,
+  };
+
+  const { Items } = await DB.scan(params).promise();
+  const randomizedItem = randomItem(Items.map(wordFormatter));
+  const status = randomizedItem ? 200 : 404;
+  res.status(status).json(randomizedItem || "NOT FOUND");
+});
 
 app.get("/:word", async (req, res) => {
   const { word } = req.params;
