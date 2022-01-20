@@ -2,19 +2,32 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { nanoid } from "nanoid";
 import Randomize from "./Randomize";
+import styled from "styled-components";
+
+const StyledList = styled.ul`
+  list-style-type: disclosure-closed;
+  font-family: cursive;
+`;
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: darkcyan;
+  text-transform: lowercase;
+`;
 
 export default function Dictionary({ dict }) {
   return (
     <>
       <Randomize />
       <h1>click a word to see definition:</h1>
-      <ul>
+      <StyledList>
         {dict.map((word) => (
           <li key={nanoid()}>
-            <Link to={word !== "loading..." && `/${word}`}>{word}</Link>
+            <StyledLink to={word !== "loading..." && `/${word}`}>
+              {word}
+            </StyledLink>
           </li>
         ))}
-      </ul>
+      </StyledList>
     </>
   );
 }

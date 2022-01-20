@@ -4,6 +4,14 @@ import { nanoid } from "nanoid";
 import { get, initDefs } from "../config";
 import Word from "./Word";
 import BackHome from "./BackHome";
+import styled from "styled-components";
+
+const StyledHeader = styled.h1`
+  font-family: system-ui;
+  text-align: center;
+  color: brown;
+  text-decoration: underline;
+`;
 
 export default function WordCard() {
   const [defs, setDefs] = useState(initDefs); //TD -> maybe add loader instead.
@@ -24,7 +32,7 @@ export default function WordCard() {
   return (
     <>
       <BackHome />
-      <h1>{word}</h1>
+      <StyledHeader>{word}</StyledHeader>
       <ol>
         {defs.map((word) => (
           <li key={nanoid()}>

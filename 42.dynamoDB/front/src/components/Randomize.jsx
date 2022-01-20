@@ -1,6 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import styled from "styled-components";
+// import { Link } from "react-router-dom";
 import { poses, isChars } from "../config";
+
+const StyledContainer = styled.div`
+  background: darkgray;
+  display: inline-grid;
+  text-align: center;
+  position: relative;
+  left: 20vw;
+  border-radius: 20px;
+`;
+const StyledInput = styled.input`
+  background-color: gainsboro;
+  border: none;
+  border-radius: 20px;
+  color: brown;
+  text-align: center;
+`;
+const StyledButton = styled.a`
+  color: darkslateblue;
+  text-decoration: none;
+`;
 
 export default function Randomize() {
   const [letter, setLetter] = useState("");
@@ -18,15 +39,14 @@ export default function Randomize() {
   };
 
   return (
-    <>
+    <StyledContainer>
       <em>randomize a word.</em>
-      <br />
       <div>
         <label htmlFor="letter input">
           choose a letter that the random word would start with.
         </label>
         <br />
-        <input
+        <StyledInput
           id="letter input"
           type="text"
           value={letter}
@@ -35,7 +55,7 @@ export default function Randomize() {
           onInput={letterValidatorHandler}
         />
       </div>
-      <Link to={url}>randomize</Link>
-    </>
+      <StyledButton href={url}>randomize</StyledButton>
+    </StyledContainer>
   );
 }
