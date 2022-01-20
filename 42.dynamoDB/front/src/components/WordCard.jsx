@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import styled from "styled-components";
 import { nanoid } from "nanoid";
-import { get, initDefs } from "../config";
+import { get, searchErrorHandler } from "../config";
 import Word from "./Word";
 import BackHome from "./BackHome";
-import styled from "styled-components";
+import Loader from "./Loader";
 
 const StyledHeader = styled.h1`
   font-family: system-ui;
@@ -14,20 +15,29 @@ const StyledHeader = styled.h1`
 `;
 
 export default function WordCard() {
-  const [defs, setDefs] = useState(initDefs); //TD -> maybe add loader instead.
+  const [defs, setDefs] = useState();
   const { word, pos } = useParams();
 
   useEffect(() => {
-    const setDefsAsync = async () => {
-      let fullApi = word.toUpperCase();
-      if (!!pos) fullApi += `/${pos}`;
+    let fullApi = word.toUpperCase();
+    if (!!pos) fullApi += `/${pos}`;
 
-      const { data } = await get(fullApi);
-      setDefs((prev) => (data.length ? data : prev)); // TD -> add proper error handler.
+    const setDefsAsync = async () => {
+      try {
+        const { data } = await get(fullApi);
+        setDefs(data);
+      } catch (error) {
+        searchErrorHandler(
+          "Sorry... It seems like something went wrong. Try again later!",
+          3000
+        );
+      }
     };
 
     setDefsAsync();
   }, [word, pos]);
+
+  if (!defs) return <Loader />;
 
   return (
     <>

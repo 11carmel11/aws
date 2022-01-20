@@ -6,8 +6,7 @@ export default function Word({ word }) {
     <>
       <h2>
         <u>{word.pos.slice(0, -1)}</u>
-      </h2>{" "}
-      {/*TD -> convert to <Link/>*/}
+      </h2>
       <ul>
         {word.definitions.map((def) => (
           <li key={nanoid()}>

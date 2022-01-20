@@ -11,6 +11,7 @@ const StyledContainer = styled.div`
   left: 20vw;
   border-radius: 20px;
 `;
+
 const StyledInput = styled.input`
   background-color: gainsboro;
   border: none;
@@ -18,6 +19,7 @@ const StyledInput = styled.input`
   color: brown;
   text-align: center;
 `;
+
 const StyledButton = styled.a`
   color: darkslateblue;
   text-decoration: none;

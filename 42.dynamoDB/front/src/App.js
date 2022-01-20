@@ -27,7 +27,6 @@ export default function App() {
           <Route path="pos/:pos" element={<RandomWordCard />}>
             <Route path=":letter" element={<RandomWordCard />} />
           </Route>
-          {/* TD -> add option choosing letter query */}
           <Route path=":word" element={<WordCard />}>
             <Route path=":pos" element={<WordCard />} />
           </Route>

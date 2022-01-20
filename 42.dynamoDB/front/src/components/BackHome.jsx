@@ -7,6 +7,7 @@ const StyledContainer = styled.button`
   background: bisque;
   border-radius: 20px;
 `;
+
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: brown;
