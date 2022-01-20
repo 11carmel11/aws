@@ -1,16 +1,19 @@
 import React from "react";
+import { nanoid } from "nanoid";
 
 export default function Word({ word }) {
   return (
-    <li>
+    <>
       <h2>
         <u>{word.pos.slice(0, -1)}</u>
       </h2>{" "}
       {/*TD -> convert to <Link/>*/}
       <ul>
         {word.definitions.map((def) => (
-          <li>
-            <code>{def}</code>
+          <li key={nanoid()}>
+            <em>
+              <b>{def}</b>
+            </em>
           </li>
         ))}
       </ul>
@@ -20,6 +23,6 @@ export default function Word({ word }) {
           <span>{word.synonyms}</span>
         </>
       )}
-    </li>
+    </>
   );
 }

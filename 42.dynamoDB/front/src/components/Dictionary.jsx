@@ -1,23 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { get } from "../config";
+import React from "react";
 import { Link } from "react-router-dom";
+import { nanoid } from "nanoid";
 
-export default function Dictionary() {
-  const [dict, setDict] = useState(["loading..."]);
-  useEffect(() => {
-    const setDictAsync = async () => {
-      const { data } = await get("all");
-      setDict(data);
-    };
-    setDictAsync();
-  }, []);
+export default function Dictionary({ dict }) {
   return (
     <>
       <h1>click a word to see definition:</h1>
       <ul>
         {dict.map((word) => (
-          <li>
-            <Link to={`/${word}`} />
+          <li key={nanoid()}>
+            <Link to={word !== "loading..." && `/${word}`}>{word}</Link>
           </li>
         ))}
       </ul>
