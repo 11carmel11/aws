@@ -16,6 +16,17 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.get("/all", async (req, res) => {
+  const fullDict = [];
+  const { Items } = await DB.scan({ TableName }).promise();
+
+  for (const { word } of Items.map(wordFormatter)) {
+    if (!fullDict.includes(word)) fullDict.push(word);
+  }
+
+  res.json(fullDict.sort());
+});
+
 app.get("/pos/:pos", async (req, res) => {
   const {
     params: { pos },
