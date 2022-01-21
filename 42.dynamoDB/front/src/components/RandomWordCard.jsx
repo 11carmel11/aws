@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { get, searchErrorHandler } from "../config";
+import { get, searchErrorHandler, objectLogger } from "../config";
 import Word from "./Word";
 import Loader from "./Loader";
 import BackHome from "./BackHome";
@@ -17,7 +17,9 @@ export default function RandomWordCard() {
       try {
         const { data } = await get(fullApi);
         setWord(data);
-      } catch (_) {
+      } catch (error) {
+        objectLogger(error);
+
         searchErrorHandler(
           "Sorry, but we could not find random word. Try again later",
           3000

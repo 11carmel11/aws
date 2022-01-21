@@ -20,6 +20,20 @@ export const get = async (rest) => {
   return await axios.get(API + rest);
 };
 
+export const objectLogger = (obj) => {
+  const keys = Object.keys(obj);
+  const values = Object.values(obj);
+  const loggedObj = {};
+  for (let i = 0; i < keys.length; i++) {
+    loggedObj[keys[i]] = values[i];
+  }
+  console.group("Logger");
+  console.log(loggedObj);
+  console.log(new Date());
+  console.groupEnd();
+  return loggedObj;
+};
+
 export const isChars = (str) => /^[A-Z]+$/i.test(str);
 
 export const poses = [

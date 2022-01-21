@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { nanoid } from "nanoid";
 import Randomize from "./Randomize";
+import Loader from "./Loader";
 
 const StyledList = styled.ul`
   list-style-type: disclosure-closed;
@@ -16,19 +17,21 @@ const StyledLink = styled(Link)`
 `;
 
 export default function Dictionary({ dict }) {
-  return (
-    <>
-      <Randomize />
-      <h1>click a word to see definition:</h1>
-      <StyledList>
-        {dict.map((word) => (
-          <li key={nanoid()}>
-            <StyledLink to={word !== "loading..." && `/${word}`}>
-              {word}
-            </StyledLink>
-          </li>
-        ))}
-      </StyledList>
-    </>
-  );
+  if (!dict) return <Loader />;
+  else
+    return (
+      <>
+        <Randomize />
+        <h1>click a word to see definition:</h1>
+        <StyledList>
+          {dict.map((word) => (
+            <li key={nanoid()}>
+              <StyledLink to={word !== "loading..." && `/${word}`}>
+                {word}
+              </StyledLink>
+            </li>
+          ))}
+        </StyledList>
+      </>
+    );
 }
