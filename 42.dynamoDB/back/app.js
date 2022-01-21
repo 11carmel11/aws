@@ -1,8 +1,9 @@
 const express = require("express");
+const serverless = require("serverless-http");
 const cors = require("cors");
 const {
   dynamodb: DB,
-  port,
+  // port,
   TableName,
   wordFormatter,
   posEnum,
@@ -15,6 +16,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.get("/", (req, res) => {
+  res.json("hello");
+});
 
 app.get("/all", async (req, res) => {
   const fullDict = [];
@@ -79,6 +84,7 @@ app.get("/:word/:pos", async (req, res) => {
   } else res.sendStatus(400);
 });
 
-app.listen(port, () => {
-  console.log(`running on port ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`running on port ${port}`);
+// });
+module.exports.handler = serverless(app);

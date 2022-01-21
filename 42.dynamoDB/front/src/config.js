@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Notyf } from "notyf";
 
-const API = "http://localhost:8080/";
+const API = "https://g5w9fp7e6i.execute-api.eu-west-2.amazonaws.com/dev/";
 
 export const initDefs = [
   { word: "loading...", pos: "loading....", definitions: ["loading..."] },
