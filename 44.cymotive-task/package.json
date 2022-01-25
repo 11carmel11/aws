@@ -1,0 +1,15 @@
+{
+  "name": "44.cymotive-task",
+  "version": "1.0.0",
+  "description": "You will build an Intrusion Detection System (IDS) to detect anomalies in vehicles using AWS Cloud. In this assignment you will develop ETL (Extract, Transform, Load) data pipelines to gather data from a vehicle and put them into a single location to query and extract insights.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "carmel-cohen",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.25.0"
+  }
+}
