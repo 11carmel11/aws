@@ -8,4 +8,4 @@ const submit = async (report) => {
   console.log(data);
 };
 
-// reports.forEach(submit);
+reports.forEach(submit);

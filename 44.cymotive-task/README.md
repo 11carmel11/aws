@@ -57,7 +57,7 @@ Hints for Phase 1:
 
 - **Create another NodeJS lambda called `ingest`.**
 
-- **Configure an s3 event notification to invoke the ingest lambda when a new object been inserted into the bucket.**
+- **Configure an s3 event notification to invoke the `ingest` lambda when a new object been inserted into the bucket.**
 
 - **Create a DynamoDB table called `ids-table`. Primary key: `vehicleId`.**
 
