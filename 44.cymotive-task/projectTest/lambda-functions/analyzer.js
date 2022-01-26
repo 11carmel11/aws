@@ -25,14 +25,11 @@ exports.handler = async (event) => {
 
   switch (stat) {
     case "numberOfReports":
-      params.Select = "COUNT";
       response.body = fullData.Count;
       response.statusCode = 200;
       break;
 
     case "numberOfVehicles":
-      params.Select = "ALL_ATTRIBUTES";
-
       const allFullItems = fullData.Items;
       const vehicleIdArr = allFullItems.map((item) => {
         const formattedItem = AWS.DynamoDB.Converter.unmarshall(item);
@@ -44,8 +41,6 @@ exports.handler = async (event) => {
       break;
 
     case "numberOfAnomalies":
-      params.ProjectionExpression = "signalsPerMinute";
-
       const signalsOfAllItems = fullData.Items;
 
       const formattedItems = signalsOfAllItems.map(
