@@ -3,6 +3,7 @@ const DynamoDB = require("aws-cdk-lib/aws-dynamodb");
 const Lambda = require("aws-cdk-lib/aws-lambda");
 const ApiGateWay = require("aws-cdk-lib/aws-apigateway");
 const S3 = require("aws-cdk-lib/aws-s3");
+const Triggers = require("aws-cdk-lib/aws-lambda-event-sources");
 
 class ProjectTestStack extends cdk.Stack {
   constructor(scope, id, props) {
@@ -32,7 +33,9 @@ class ProjectTestStack extends cdk.Stack {
     });
     //#endregion
 
-    const api = new ApiGateWay.RestApi(this, "idsGateWay");
+    const api = new ApiGateWay.RestApi(this, "idsGateWay", {
+      deployOptions: { stageName: "api" },
+    });
 
     const bucket = new S3.Bucket(this, "reports-carmel", {
       bucketName: "reports-carmel",
@@ -62,6 +65,15 @@ class ProjectTestStack extends cdk.Stack {
       );
     //#endregion
 
+    //#region lambda_ingest Trigger added
+    lambdaFunction_ingest.addEventSource(
+      new Triggers.S3EventSource(bucket, {
+        events: [S3.EventType.OBJECT_CREATED],
+      })
+    );
+    //#endregion
+
+    // logs the api url on deploy
     new cdk.CfnOutput(this, "MY URL", { value: api.url || "NO URL!!!!" });
   }
 }
