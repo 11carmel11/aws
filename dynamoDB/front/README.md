@@ -10,8 +10,8 @@
 
 ### word card
 
-![home page](./assets/word.jpg)
+![word](./assets/word.jpg)
 
 ### loader
 
-![home page](./assets/loader.jpg)
+![loader](./assets/loader.jpg)
